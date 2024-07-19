@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,17 +15,12 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private bool isGrounded = true;
-    private const float ceilingRadius = .01f;
-    private const float groundedRadius = .01f;
     private float xMovement = 0;
-    
-    private Transform groundCheck;
-    private Transform ceilingCheck;
+
     private Animator animator;
     private PlayerInput playerInput;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
-    private Health health;
     private Upgradeable upgradeable;
     private Movement movementComponent;
 
@@ -32,16 +28,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform shootingPoint;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private Transform ceilingCheck;
+    [SerializeField] private float ceilingRadius = .01f;
+    [SerializeField] private float groundedRadius = .01f;
 
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        groundCheck = transform.Find("GroundCheck");
-        ceilingCheck = transform.Find("CeilingCheck");
         spriteRenderer = GetComponent<SpriteRenderer>();
-        health = GetComponent<Health>();
         upgradeable = GetComponent<Upgradeable>();
         movementComponent = GetComponent<Movement>();
     }
@@ -49,6 +46,12 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Handles.DrawWireDisc(groundCheck.position, new Vector3(0, 0, 1), groundedRadius);
+        Handles.DrawWireDisc(ceilingCheck.position, new Vector3(0, 0, 1), ceilingRadius);
     }
 
     void FixedUpdate()
@@ -103,6 +106,7 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("Dead", true);
         Destroy(gameObject, 0.5f);
+        GetComponent<BoxCollider2D>().enabled = false;
         rb.isKinematic = true;
         // game over screen (?)
         // lifeNumber --  (?)

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Box : MonoBehaviour
@@ -18,8 +18,11 @@ public class Box : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // TODO hit solo da sotto
-        if (collision.gameObject.TryGetComponent(out Upgradeable upgradeable) && hasCollectable)
+        Vector3 direction = transform.position - collision.transform.position;
+
+        bool isFromBottom = direction.y >= 0;
+
+        if (collision.gameObject.TryGetComponent(out Upgradeable upgradeable) && hasCollectable && isFromBottom)
         {
             GameObject collectable = collectableStrategy.selectCollectable(upgradeable);
 
