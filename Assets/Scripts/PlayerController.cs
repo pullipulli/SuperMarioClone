@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Upgradeable upgradeable;
     private Movement movementComponent;
+    private GameManager gameManager;
 
     [SerializeField] private float jumpForce = 10;
     [SerializeField] private LayerMask whatIsGround;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         upgradeable = GetComponent<Upgradeable>();
         movementComponent = GetComponent<Movement>();
+        gameManager = (GameManager)GameManager.Instance;
     }
 
     void Update()
@@ -109,7 +111,8 @@ public class PlayerController : MonoBehaviour
         GetComponent<BoxCollider2D>().enabled = false;
         rb.isKinematic = true;
         // game over screen (?)
-        // lifeNumber --  (?)
+
+        gameManager.OnPlayerDeath();
     }
 
     public void Jump()
@@ -121,5 +124,10 @@ public class PlayerController : MonoBehaviour
     public void WhenHit()
     {
         spriteRenderer.color = Color.white;
+    }
+
+    private void OnDestroy()
+    {
+        Death();
     }
 }

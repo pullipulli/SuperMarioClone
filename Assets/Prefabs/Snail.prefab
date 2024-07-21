@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5482109527402295109}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.50005, y: 0, z: 0}
+  m_LocalPosition: {x: 0.60006, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -267,7 +267,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   rayCastOrigin: {fileID: 7456892846495512471}
-  maxRayCastDistance: 0.05
+  maxRayCastDistance: 0.25
 --- !u!114 &8307109404856055350
 MonoBehaviour:
   m_ObjectHideFlags: 0
