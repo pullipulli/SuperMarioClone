@@ -9,6 +9,7 @@ public class Box : MonoBehaviour
     private Vector3 position;
 
     [SerializeField] private CollectableStrategy collectableStrategy;
+    [SerializeField] private float xColliderTolerance = 0.25f;
 
     private void Awake()
     {
@@ -21,8 +22,11 @@ public class Box : MonoBehaviour
         Vector3 direction = transform.position - collision.transform.position;
 
         bool isFromBottom = direction.y >= 0;
+        bool isFromLeft = direction.x > xColliderTolerance;
+        bool isFromRight = direction.x < xColliderTolerance;
 
-        if (collision.gameObject.TryGetComponent(out Upgradeable upgradeable) && hasCollectable && isFromBottom)
+        if (collision.gameObject.TryGetComponent(out Upgradeable upgradeable) && hasCollectable 
+            && isFromBottom && (!isFromLeft || !isFromRight))
         {
             GameObject collectable = collectableStrategy.selectCollectable(upgradeable);
 

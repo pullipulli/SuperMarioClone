@@ -11,9 +11,7 @@ public class Movement : MonoBehaviour
     {
         facingRight = !facingRight;
 
-        if (facingRight)
-            direction = 1;
-        else direction = -1;
+        direction = facingRight ? 1 : -1;
 
         transform.Rotate(0, 180f, 0);
     }
@@ -30,5 +28,10 @@ public class Movement : MonoBehaviour
         {
             transform.Translate(direction * v.x * maxMovementSpeed * Time.deltaTime, v.y, 0);
         }
+    }
+
+    public void doubleSpeed()
+    {
+        maxMovementSpeed *= 2;
     }
 }

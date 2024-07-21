@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(CollisionDamage), typeof(Animator), typeof(Movement))]
@@ -8,9 +7,11 @@ public abstract class Enemy : MonoBehaviour
     protected Animator animator;
     protected Movement movementComponent;
 
-    [SerializeField] protected float xMovement = 2f;
     [SerializeField] private LayerMask whatIsGround;
-    [SerializeField] private LayerMask whatIsObstacle;
+    [SerializeField] private Transform rayCastOrigin;
+    [SerializeField, Range(0, 1)] private float maxRayCastDistance = 0.5f;
+
+    private float xDirection = 1f;
 
     protected void Awake()
     {
@@ -20,13 +21,15 @@ public abstract class Enemy : MonoBehaviour
 
     protected void Update()
     {
-        movementComponent.Move(new Vector2(xMovement, 0));
+        movementComponent.Move(new Vector2(xDirection, 0));
     }
 
-    protected void OnCollisionEnter2D(Collision2D collision)
+    protected void FixedUpdate()
     {
-        if (collision.otherCollider.IsTouchingLayers(whatIsObstacle))
-            xMovement = -xMovement;
+        RaycastHit2D hit = Physics2D.Raycast(rayCastOrigin.transform.position, new Vector2(xDirection, 0), maxRayCastDistance);
+
+        if (hit.collider != null && !hit.collider.gameObject.TryGetComponent(out PlayerController _))
+            xDirection = -xDirection;
     }
 
     public void Death()

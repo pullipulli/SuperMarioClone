@@ -8,6 +8,6 @@ public class Snail : Enemy
     public void ShellMode()
     {
         base.animator.SetBool("ShellMode", true);
-        base.xMovement *= 2;
+        base.movementComponent.doubleSpeed();
     }
 }
