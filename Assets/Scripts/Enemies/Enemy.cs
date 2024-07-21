@@ -28,8 +28,22 @@ public abstract class Enemy : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(rayCastOrigin.transform.position, new Vector2(xDirection, 0), maxRayCastDistance);
 
-        if (hit.collider != null && !hit.collider.gameObject.TryGetComponent(out PlayerController _))
-            xDirection = -xDirection;
+        if (hit.collider != null)
+        {
+
+            if (hit.collider.gameObject.TryGetComponent<Enemy>(out Enemy other))
+            {
+                FlipEnemy(other);
+                FlipEnemy(this);
+            }
+            else if (!hit.collider.gameObject.TryGetComponent(out PlayerController _))
+                FlipEnemy(this);
+        }
+    }
+
+    private void FlipEnemy(Enemy enemy)
+    {
+        enemy.xDirection = -xDirection;
     }
 
     public void Death()
