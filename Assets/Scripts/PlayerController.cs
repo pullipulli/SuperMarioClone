@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 {
     private bool isGrounded = true;
     private float xMovement = 0;
+    private bool isDestroyed = false;
 
     private Animator animator;
     private PlayerInput playerInput;
@@ -42,12 +43,16 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         upgradeable = GetComponent<Upgradeable>();
         movementComponent = GetComponent<Movement>();
-        gameManager = (GameManager)GameManager.Instance;
     }
 
     void Update()
     {
         Move();
+    }
+
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
     }
 
     void OnDrawGizmosSelected()
@@ -106,13 +111,15 @@ public class PlayerController : MonoBehaviour
 
     public void Death()
     {
+        if (isDestroyed) return;
+
         animator.SetBool("Dead", true);
         Destroy(gameObject, 0.5f);
         GetComponent<BoxCollider2D>().enabled = false;
         rb.isKinematic = true;
         // game over screen (?)
-
         gameManager.OnPlayerDeath();
+        isDestroyed = true;
     }
 
     public void Jump()
