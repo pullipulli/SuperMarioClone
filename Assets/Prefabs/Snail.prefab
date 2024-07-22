@@ -361,7 +361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8307109405475335999}
   - component: {fileID: 8307109405475335998}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

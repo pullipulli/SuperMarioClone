@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e35b839d1cf16354d9637744edacf6fe, type: 3}
   m_Name: InvisibleOneUp
   m_EditorClassIdentifier: 
-  collectable: {fileID: 0}
+  collectable: {fileID: 5747909105812843490, guid: b14fc2c0732e880438f70626852bd360, type: 3}

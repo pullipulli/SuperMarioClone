@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 11363928030310019}
   - component: {fileID: 830675416556693990}
   - component: {fileID: 2707518072256393360}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: LittleObstacleTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

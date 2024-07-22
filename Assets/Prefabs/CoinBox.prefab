@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3525096903026368807}
   - component: {fileID: 3525096903026368803}
   - component: {fileID: 3525096903026368800}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: CoinBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,3 +173,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectableStrategy: {fileID: 11400000, guid: acdf6d881cdcca042a99545003071efc, type: 2}
+  xColliderTolerance: 0.25

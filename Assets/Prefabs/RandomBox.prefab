@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8980622767415990882}
   - component: {fileID: 8980622767415990886}
   - component: {fileID: 8980622767415990885}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: RandomBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,3 +173,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectableStrategy: {fileID: 11400000, guid: f83ed94a270332643be9dc5b88e77fb9, type: 2}
+  xColliderTolerance: 0.25

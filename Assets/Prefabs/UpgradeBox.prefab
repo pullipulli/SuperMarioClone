@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1154319036583053299}
   - component: {fileID: 1154319036583053303}
   - component: {fileID: 1154319036583053300}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: UpgradeBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,3 +173,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectableStrategy: {fileID: 11400000, guid: 26de86508291f314d801978a03aab244, type: 2}
+  xColliderTolerance: 0.25
