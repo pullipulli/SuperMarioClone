@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(CollisionDamage), typeof(Animator), typeof(Movement))]
@@ -13,6 +14,14 @@ public abstract class Enemy : MonoBehaviour
 
     private float xDirection = 1f;
 
+    private bool IsVisible()
+    {
+        Vector3 posInCamera = Camera.main.WorldToViewportPoint(transform.position);
+
+        return posInCamera.x >= 0 && posInCamera.x <= 1 && posInCamera.y >= 0 && posInCamera.y <= 1 && posInCamera.z >= 0;
+    }
+
+
     protected void Awake()
     {
         animator = GetComponent<Animator>();
@@ -21,7 +30,8 @@ public abstract class Enemy : MonoBehaviour
 
     protected void Update()
     {
-        movementComponent.Move(new Vector2(xDirection, 0));
+        if (IsVisible())
+            movementComponent.Move(new Vector2(xDirection, 0));
     }
 
     protected void FixedUpdate()
@@ -31,14 +41,24 @@ public abstract class Enemy : MonoBehaviour
         if (hit.collider != null)
         {
 
-            if (hit.collider.gameObject.TryGetComponent<Enemy>(out Enemy other))
+            if (hit.collider.gameObject.TryGetComponent(out Enemy other))
             {
                 FlipEnemy(other);
                 FlipEnemy(this);
             }
             else if (!hit.collider.gameObject.TryGetComponent(out PlayerController _))
+            {
                 FlipEnemy(this);
+            }
+                
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Vector3 direction = rayCastOrigin.transform.TransformDirection(Vector2.right) * maxRayCastDistance;
+        Gizmos.DrawRay(rayCastOrigin.transform.position, direction);
     }
 
     private void FlipEnemy(Enemy enemy)

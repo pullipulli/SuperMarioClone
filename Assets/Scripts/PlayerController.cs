@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,7 +7,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(Damageable))]
 [RequireComponent(typeof(Upgradeable))]
 [RequireComponent(typeof(Movement))]
 [RequireComponent (typeof(JumpDamage))]

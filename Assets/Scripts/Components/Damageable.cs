@@ -8,10 +8,12 @@ public class Damageable : MonoBehaviour
 {
     private Health health;
 
-    [SerializeField] UnityEvent onHit;
+    [SerializeField] private UnityEvent onHit;
     [SerializeField, Tooltip("How many times in a second the object can be damaged")] private float damageRate = 1f;
 
     private float canTakeDamage = -1;
+
+    public bool Invincible { get; set; }
 
 
     private void Awake()
@@ -21,11 +23,12 @@ public class Damageable : MonoBehaviour
 
     public void DealDamage(float damageAmount)
     {
-        if (Time.time > canTakeDamage)
+        if (Time.time > canTakeDamage && !Invincible)
         {
             canTakeDamage = Time.time + damageRate;
             onHit.Invoke();
             health.ChangeHealth(damageAmount);
         }
     }
+
 }
